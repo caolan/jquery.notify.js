@@ -1,0 +1,96 @@
+<html>
+    <head>
+        <title>Notifications</title>
+        <script type="text/javascript" src="jquery-1.3.2.js"></script>
+        <script type="text/javascript" src="jquery.jcorners.js"></script>
+        <script type="text/javascript" src="jquery.jscast.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                $.jcorners("#notifications li",{radius: 5});
+                $(".eventtest").click(function(){alert("hi");});
+                $("#notifications li").hover(
+                    function(){
+                        $(this).fadeTo(200, 0.15);
+                    },
+                    function(){
+                        $(this).fadeTo(200, 0.85);
+                    }
+                );
+                // get cursor from object below, currently causes
+                // flashing due to triggering hover on/off events
+                // when hide/showing
+                $("#notifications li").mousemove(function(){
+                    $(this).parent().hide();
+                    el = document.elementFromPoint(e.pageX, e.pageY);
+                    $(this).parent().show();
+                    return $(el).css('cursor');
+                });
+                // hide/show causes hover on/off events on click, but less
+                // noticable as only happens once
+                $("#notifications li").click(function(e){
+                    $(this).parent().hide();
+                    el = document.elementFromPoint(e.pageX, e.pageY);
+                    $(this).parent().show();
+                    $(el).click();
+                });
+            });
+        </script>
+        <style>
+            #notifications {
+                position: fixed;
+                top: 10px;
+                left: 10px;
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                font-family: Arial,sans-serif;
+                font-size: 10pt;
+                width: 300px;
+            }
+            #notifications li {
+                background: #000;
+                opacity: 0.85;
+                padding: 18px;
+                margin: 5px;
+                color: #fff;
+            }
+            #notifications li.icon {
+                padding-left: 84px;
+                height: 52px;
+            }
+            #notifications li .title {
+                font-size: 12pt;
+                font-weight: bold;
+            }
+            #notifications li .icon {
+                width: 52px;
+                height: 52px;
+                background: #f00;
+                position: absolute;
+                top: 23px;
+                left: 23px;
+            }
+            .eventtest {
+                width: 50px;
+                height: 50px;
+                background: #f00;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <ul id="notifications">
+            <li class="icon">
+                <div class="icon"></div>
+                <div class="title">First note</div>
+                blah blah blah
+            </li>
+            <li>
+                <div class="title">First note</div>
+                blah blah blah
+            </li>
+            <li>note 2</li>
+        </ul>
+        <div class="eventtest">test</div>
+    </body>
+</html>
