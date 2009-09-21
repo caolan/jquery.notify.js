@@ -6,36 +6,38 @@
         <script type="text/javascript" src="jquery.jscast.js"></script>
         <script type="text/javascript">
             $(function(){
-                $.jcorners("#notifications li",{radius: 5});
                 $(".eventtest").click(function(){alert("hi");});
+                $.jcorners("#notifications li",{radius: 5});
                 $(document).mousemove(function(e){
                     $("#notifications li").each(function(){
                         var rect = this.getBoundingClientRect();
+                        // is the mouse move event within the bounding rect
+                        // for this element?
                         if(e.pageX >= rect.left && e.pageX <= rect.right
                         && e.pageY >= rect.top && e.pageY <= rect.bottom){
-                            fadeout(this);
+                            if(!$(this).data('notify_hover')){
+                                $(this).trigger('notify_mouseover');
+                                $(this).data('notify_hover', true);
+                            }
                         }
-                        else fadein(this);
+                        else if($(this).data('notify_hover')){
+                            $(this).trigger('notify_mouseout');
+                            $(this).data('notify_hover', false);
+                        }
                     });
                 });
-                function fadein(el){
-                    if($(el).data('hover')){
-                        $(el).fadeTo(200, 0.85);
-                        $(el).data('hover', false);
-                    }
-                }
-                function fadeout(el){
-                    if(!$(el).data('hover')){
-                        $(el).fadeTo(200, 0.15);
-                        $(el).data('hover', true);
-                    }
-                }
                 function get_element_below(el, x, y){
                     $(el).parent().hide();
                     var below = document.elementFromPoint(x,y);
                     $(el).parent().show();
                     return below;
                 }
+                $("#notifications li").bind('notify_mouseover', function(){
+                    $(this).fadeTo(200, 0.15);
+                });
+                $("#notifications li").bind('notify_mouseout', function(){
+                    $(this).fadeTo(200, 0.85);
+                });
                 $("#notifications li").mousemove(function(e){
                     var el = get_element_below(this, e.pageX, e.pageY);
                     $(this).css('cursor', $(el).css('cursor'));
