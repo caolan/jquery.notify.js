@@ -9,17 +9,13 @@
                 $.jcorners("#notifications li",{radius: 5});
                 $(".eventtest").click(function(){alert("hi");});
                 $(document).mousemove(function(e){
-                    var mouse_x = e.pageX;
-                    var mouse_y = e.pageY;
                     $("#notifications li").each(function(){
                         var rect = this.getBoundingClientRect();
-                        if(mouse_x >= rect.left && mouse_x <= rect.right
-                        && mouse_y >= rect.top && mouse_y <= rect.bottom){
+                        if(e.pageX >= rect.left && e.pageX <= rect.right
+                        && e.pageY >= rect.top && e.pageY <= rect.bottom){
                             fadeout(this);
                         }
-                        else {
-                            fadein(this);
-                        }
+                        else fadein(this);
                     });
                 });
                 function fadein(el){
