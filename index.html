@@ -8,25 +8,6 @@
             $(function(){
                 $.jcorners("#notifications li",{radius: 5});
                 $(".eventtest").click(function(){alert("hi");});
-                /*$("#notifications li").hover(
-                    function(){
-                        console.log("hover_on");
-                        console.log("hoverlock:" + $(this).data('hoverlock'));
-                        if(!$(this).data('hoverlock')){
-                            $(this).fadeTo(200, 0.15);
-                        }
-                    },
-                    function(){
-                        console.log("hover_off");
-                        console.log("hoverlock:" + $(this).data('hoverlock'));
-                        if(!$(this).data('hoverlock')){
-                            $(this).fadeTo(200, 0.85);
-                        }
-                    }
-                );*/
-                // get cursor from object below, currently causes
-                // flashing due to triggering hover on/off events
-                // when hide/showing
                 $(document).mousemove(function(e){
                     var mouse_x = e.pageX;
                     var mouse_y = e.pageY;
@@ -34,31 +15,37 @@
                         var rect = this.getBoundingClientRect();
                         if(mouse_x >= rect.left && mouse_x <= rect.right
                         && mouse_y >= rect.top && mouse_y <= rect.bottom){
-                            $(this).css('opacity', 0.15);
+                            fadeout(this);
                         }
                         else {
-                            $(this).css('opacity', 0.85);
+                            fadein(this);
                         }
                     });
                 });
+                function fadein(el){
+                    if($(el).data('hover')){
+                        $(el).fadeTo(200, 0.85);
+                        $(el).data('hover', false);
+                    }
+                }
+                function fadeout(el){
+                    if(!$(el).data('hover')){
+                        $(el).fadeTo(200, 0.15);
+                        $(el).data('hover', true);
+                    }
+                }
+                function get_element_below(el, x, y){
+                    $(el).parent().hide();
+                    var below = document.elementFromPoint(x,y);
+                    $(el).parent().show();
+                    return below;
+                }
                 $("#notifications li").mousemove(function(e){
-                    //$(this).data('hoverlock', true);
-                    //console.log("hide");
-                    $(this).parent().hide();
-                    el = document.elementFromPoint(e.pageX, e.pageY);
-                    $(this).parent().show();
-                    //console.log("show");
-                    /*setTimeout(function(){
-                        $(this).data('hoverlock', false);
-                    }, 200);*/
+                    var el = get_element_below(this, e.pageX, e.pageY);
                     $(this).css('cursor', $(el).css('cursor'));
                 });
-                // hide/show causes hover on/off events on click, but less
-                // noticable as only happens once
                 $("#notifications li").click(function(e){
-                    $(this).parent().hide();
-                    el = document.elementFromPoint(e.pageX, e.pageY);
-                    $(this).parent().show();
+                    var el = get_element_below(this, e.pageX, e.pageY);
                     $(el).click();
                 });
             });
