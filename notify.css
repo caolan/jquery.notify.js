@@ -1,0 +1,35 @@
+#notifications {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 9999;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-family: Arial,sans-serif;
+    font-size: 10pt;
+    width: 300px;
+}
+#notifications li {
+    background: #000;
+    opacity: 0.85;
+    padding: 18px;
+    margin: 5px;
+    color: #fff;
+    position: relative;
+}
+#notifications li.icon {
+    padding-left: 84px;
+    height: 52px;
+}
+#notifications li .title {
+    font-size: 12pt;
+    font-weight: bold;
+}
+#notifications li .icon {
+    width: 52px;
+    height: 52px;
+    background: #f00;
+    position: absolute;
+    left: 18px;
+}

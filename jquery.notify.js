@@ -1,18 +1,19 @@
 /*
- * jQuery Notify Plugin - by @caolan
+ * jQuery Notify Plugin v0.1 - by @caolan
  *
  *   Attempts to implement notifications similar to those available in
  *   Ubuntu since Jaunty Jackalope (9.04) [see: $ aptitude show notify-osd]
  *
- *   For more information on the notifications this plugin attempts to
- *   replicate, see the following:
+ *   For more information on the notifications, see the following:
  *      - http://www.markshuttleworth.com/archives/253
  *      - http://launchpad.net/notify-osd
  *
  *   Dependencies: jquery.jcorners.js (for cross-browser rounded corners)
+ *                 jquery 1.3
  *
  * Copyright (c) 2009 Caolan McMahon (http://caolanmcmahon.com)
- * Licensed under the GPL
+ * Dual licensed under the MIT and GPL licenses (same as jQuery).
+ * http://docs.jquery.com/License
  */
 
 (function($){
@@ -79,7 +80,7 @@
             // get or create notifications list
             var c = $("#notifications");
             if(!c.length){
-                c = $('<ul id="notifications"></ul>').prependTo(document.body);
+                c = $('<ul id="notifications"></ul>').appendTo(document.body);
             }
             return c;
         },
