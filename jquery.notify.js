@@ -8,8 +8,7 @@
  *      - http://www.markshuttleworth.com/archives/253
  *      - http://launchpad.net/notify-osd
  *
- *   Dependencies: jquery.jcorners.js (for cross-browser rounded corners)
- *                 jquery 1.3
+ *   Dependencies: jquery 1.3
  *
  * Copyright (c) 2009 Caolan McMahon (http://caolanmcmahon.com)
  * Dual licensed under the MIT and GPL licenses (same as jQuery).
@@ -61,8 +60,6 @@
                 $(this).parent().below(e.pageX, e.pageY).click();
             });
         }
-        // make pretty
-        if($.jcorners) $.jcorners(li,{radius: 5});
 
         // create timeout to fadeout and cleanup
         setTimeout(function(){

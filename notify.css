@@ -17,10 +17,16 @@
     margin: 5px;
     color: #fff;
     position: relative;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
 }
 #notifications li.icon {
     padding-left: 84px;
     height: 52px;
+}
+* html #notifications li.icon {
+    height /**/: 88px;
 }
 #notifications li .title {
     font-size: 12pt;
