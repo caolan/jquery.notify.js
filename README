@@ -1,0 +1,56 @@
+======================================
+jQuery Notify Plugin v0.1 - by @caolan
+======================================
+
+  Attempts to implement notifications similar to those available in
+  Ubuntu since Jaunty Jackalope (9.04) [see: $ aptitude show notify-osd]
+
+  For more information on the notifications, see the following:
+     - http://www.markshuttleworth.com/archives/253
+     - http://launchpad.net/notify-osd
+
+  Dependencies: jQuery 1.3
+                jquery.jcorners.js
+
+Copyright (c) 2009 Caolan McMahon (http://caolanmcmahon.com)
+Dual licensed under the MIT and GPL licenses (same as jQuery).
+http://docs.jquery.com/License
+
+
+==================
+Installation
+------------------
+
+Include notify.css and jquery.notify.js in your HTML. You'll also need,
+jquery-1.3.2.js (or latest jquery 1.3 release) and jquery.jcorners.js.
+
+You can get jquery.jcorners.js from:
+http://plugins.jquery.com/project/JCorners
+
+
+==================
+Usage
+------------------
+
+You can then create notifications by calling $.notify(options), where
+options is an object with some or all or the attributes: title, text, icon,
+and delay.
+
+Example: $.notify({title:'Example', text:'Lorem ipsum...', icon:'image.png'});
+
+
+==================
+Supported Browsers
+------------------
+
+Tested and working on FF3 (Windows XP & Ubuntu), IE7, IE6
+
+
+==================
+Known Issues
+------------------
+
+Opera:              no rounded corners support
+Firefox 2.x:        does not implement getBoundingClientRect, crashes on hover
+Safari on Windows:  no fade out on hover, click through works however
+                    (Safari on Mac not tested)

@@ -2,13 +2,10 @@
  * jQuery Notify Plugin v0.1 - by @caolan
  *
  *   Attempts to implement notifications similar to those available in
- *   Ubuntu since Jaunty Jackalope (9.04) [see: $ aptitude show notify-osd]
+ *   Ubuntu since Jaunty Jackalope (9.04)
  *
- *   For more information on the notifications, see the following:
- *      - http://www.markshuttleworth.com/archives/253
- *      - http://launchpad.net/notify-osd
- *
- *   Dependencies: jquery 1.3
+ *   Dependencies: jQuery 1.3
+ *                 jquery.jcorners.js
  *
  * Copyright (c) 2009 Caolan McMahon (http://caolanmcmahon.com)
  * Dual licensed under the MIT and GPL licenses (same as jQuery).
