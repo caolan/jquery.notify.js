@@ -36,16 +36,19 @@
         // main notification function, options is an object which can include:
         // title, text, icon, delay
         var li = $("<li/>");
+        var inner = $("<div/>").addClass("inner").appendTo(li);;
 
         // add content
         if(options.icon){
-            li.append($("<div/>").addClass("icon")).addClass("icon");
+            var img = $("<img alt='icon' />").attr('src', options.icon);
+            inner.append($("<div/>").addClass("icon").append(img));
+            li.addClass("withicon");
         }
         if(options.title){
-            li.append($("<div/>").addClass("title").text(options.title));
+            inner.append($("<div/>").addClass("title").text(options.title));
         }
         if(options.text){
-            li.append(options.text);
+            inner.append($("<div/>").addClass("text").text(options.text));
         }
 
         // bind event handlers
@@ -63,13 +66,21 @@
 
         // create timeout to fadeout and cleanup
         setTimeout(function(){
-            li.fadeOut('slow', function(){
-                li.remove();
-                $("#notifications:empty").remove();
+            li.fadeTo('slow', 0, function(){
+                $(this).slideUp('fast', function(){
+                    $(this).remove();
+                    $("#notifications:empty").remove();
+                });
             });
-        }, options.delay || 3000);
+        }, options.delay || 5000);
 
-        return li.appendTo($._notify.getContainer());
+        li.appendTo($._notify.getContainer());
+        if($.boxModel){
+            $.jcorners(inner, {radius:6});
+        } else {
+            $.jcorners(inner, {radius:3});
+        }
+        return li;
     };
 
     $._notify = {

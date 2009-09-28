@@ -1,9 +1,10 @@
 <html>
     <head>
         <title>jQuery Notify Plugin Examples</title>
-        <script type="text/javascript" src="jquery-1.3.2.js"></script>
-        <script type="text/javascript" src="jquery.notify.js"></script>
-        <link rel="stylesheet" type="text/css" href="notify.css" />
+        <script type="text/javascript" src="js/jquery-1.3.2.js"></script>
+        <script type="text/javascript" src="js/jquery.jcorners.js"></script>
+        <script type="text/javascript" src="../jquery.notify.js"></script>
+        <link rel="stylesheet" type="text/css" href="../notify.css" />
         <script type="text/javascript">
             $(function(){
                 $(".eventtest").click(function(){
@@ -63,7 +64,9 @@
         </dl>
         <h2>Examples</h2>
         <form action="" method="GET">
-            <input type="button" onclick="javascript:$.notify({text:'testing', title:'blah', icon:true});" value="notification">
+            <input type="button" onclick="javascript:$.notify({text:'This notification has an error icon', title:'Error', icon:'images/dialog-error.png'});" value="Error">
+            <input type="button" onclick="javascript:$.notify({text:'This notification has an information icon', title:'Information', icon:'images/dialog-information.png'});" value="Information">
+            <input type="button" onclick="javascript:$.notify({text:'This notification has a warning icon', title:'Warning', icon:'images/dialog-warning.png'});" value="Warning">
         </form>
         <div class="eventtest">click through!</div>
     </body>

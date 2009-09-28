@@ -1,41 +1,69 @@
 #notifications {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 9999;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+    font-size: 12pt;
     font-family: Arial,sans-serif;
-    font-size: 10pt;
-    width: 300px;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    width: 284px;
+    position: absolute;
+    top: 0;
+    right: 2.0em;
+}
+*html #notifications {
+    width /**/: 302px;
+    top: 0.05em;
+    right: 0.15em;
 }
 #notifications li {
-    background: #000;
-    opacity: 0.85;
-    padding: 18px;
-    margin: 5px;
+    margin: 0.5em;
     color: #fff;
+    min-height: 3em;
     position: relative;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
 }
-#notifications li.icon {
-    padding-left: 84px;
-    height: 52px;
+*html #notifications li {
+    margin /**/: 0.45em 0;
+    height: 3em;
 }
-* html #notifications li.icon {
-    height /**/: 88px;
+#notifications li * {
+    margin: 0;
+    padding: 0;
 }
-#notifications li .title {
-    font-size: 12pt;
+#notifications li .inner {
+    margin: 0;
+    padding: 1em;
+    background: #000;
+    width: 100%;
+}
+*html #notifications li .inner {
+    padding: 0.6em;
+    margin: 7px 0 0 2px;
+}
+#notifications li .inner .title {
     font-weight: bold;
+    font-size: 14pt;
 }
-#notifications li .icon {
+#notifications li .inner .text {
+    font-size: 11pt;
+}
+#notifications .withicon .inner * {
+    margin-left: 68px;
+}
+#notifications li .inner .icon {
+    display: block;
     width: 52px;
     height: 52px;
-    background: #f00;
     position: absolute;
-    left: 18px;
+    text-align: center;
+    top: 1em;
+    left: -52px;
+    overflow: hidden;
+}
+#notifications li .inner .icon img {
+    margin: 0;
+}
+#notifications .withicon .inner {
+    min-height /**/: 52px;
+}
+*html #notifications .withicon {
+    height /**/: 80px;
 }
