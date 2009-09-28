@@ -29,6 +29,7 @@
             }
             p {
                 margin: 0.2em 0 0.5em 0;
+                width: 42em;
             }
             .eventtest {
                 width: 100px;
@@ -63,11 +64,18 @@
             </dd>
         </dl>
         <h2>Examples</h2>
+        <p>Click on the buttons below to create some example notifications</p>
         <form action="" method="GET">
             <input type="button" onclick="javascript:$.notify({text:'This notification has an error icon', title:'Error', icon:'images/dialog-error.png'});" value="Error">
             <input type="button" onclick="javascript:$.notify({text:'This notification has an information icon', title:'Information', icon:'images/dialog-information.png'});" value="Information">
             <input type="button" onclick="javascript:$.notify({text:'This notification has a warning icon', title:'Warning', icon:'images/dialog-warning.png'});" value="Warning">
         </form>
+        <p>
+            You should be able to hover over the notifications, at which point
+            they should become transparent, and the cursor will change to reflect
+            the styles for the elements below it. Clicking on an element beneath
+            a notification should trigger the click event for that element.
+        </p>
         <div class="eventtest">click through!</div>
     </body>
 </html>
