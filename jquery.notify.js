@@ -25,7 +25,10 @@
     $.fn.is_hovering = function(x,y){
         // we can't rely on the usual mouseover event due to $().below()
         // re-triggering it due to hide/show of element
-        var r = this[0].getBoundingClientRect();
+        var el = $(this);
+        var r = el.offset();
+        r.bottom = r.top + el.height();
+        r.right = r.left + el.width();
         return (x >= r.left && x <= r.right && y >= r.top && y <= r.bottom);
     };
 
