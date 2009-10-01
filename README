@@ -10,7 +10,7 @@ For more information on the notifications, see the following:
  - http://launchpad.net/notify-osd
 
 Dependencies: jQuery 1.3
-            jquery.jcorners.js
+              jquery.jcorners.js
 
 Copyright (c) 2009 Caolan McMahon (http://caolanmcmahon.com)
 Dual licensed under the MIT and GPL licenses (same as jQuery).
@@ -43,18 +43,20 @@ Example: $.notify({title:'Example', text:'Lorem ipsum...', icon:'image.png'});
 Supported Browsers
 ------------------
 
-Tested and working on FF3 (Windows XP & Ubuntu), IE7, IE6
+Tested and working on:
+    
+    FF3 (Windows XP & Ubuntu)
+    IE7
+    IE6
+    Safari 3.2.1 (Windows XP)
+    Opera 10.0 (Windows XP)
 
+Additional testing would be welcome, if you have any more results
+to add please get in touch.
 
 ==================
 Known Issues
 ------------------
 
-Opera:              no rounded corners support
-Firefox 2.x:        does not implement getBoundingClientRect, breaks on hover
-Safari on Windows:  no fade out on hover, click through works however
-                    (Safari on Mac not tested)
-
-If you fancy tackling any of these or testing some more browsers I'd
-appreciate the help ;) You can fork the project on github or contact me with
-your patches or test results.
+There are currently no known issues (a little sluggish on Opera, perhaps).
+If you find any, please submit an Issue on GitHub
