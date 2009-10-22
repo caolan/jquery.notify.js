@@ -92,12 +92,110 @@
             }
             return c;
         },
+        add_styles: function(){
+            // add style tag for storing copies of :hover css in custom classes,
+            // allowing us to later add this css manually (since :hover is not
+            // triggered for elements below a notification)
+            $('head').append($('<style/>').attr({
+                rel: "stylesheet",
+                media: "screen",
+                title: "notifySheet",
+                type: "text/css"
+            }));
+            function getStylesheetByTitle(title){
+                for(var i=0; i<document.styleSheets.length; i++){
+                    if(document.styleSheets[i].title == title){
+                        return document.styleSheets[i];
+                    }
+                }
+                return null;
+            }
+            var storage = getStylesheetByTitle('notifySheet');
+
+            function appendRule(sheet, selector, rules){
+                if(sheet.addRule){
+                    return sheet.addRule(selector, rules);
+                }
+                else if(sheet.insertRule){
+                    var index = sheet.cssRules.length;
+                    var css = selector + " {" + rules + " }";
+                    return sheet.insertRule(css, index);
+                }
+            }
+
+            var class_counter = 0;
+
+            // returns next class number and increments the counter
+            /*function next_class(){
+                var cl = "hoverclass" + class_counter;
+                class_counter++;
+                return cl
+            }*/
+            // returns a list of rules for this sheet and its imports
+            function parse_sheet(sheet){
+                var rules = [];
+                if(sheet.imports){
+                    for(var i=0; i<sheet.imports.length; i++){
+                        rules = rules.concat(parse_sheet(sheet.imports[i]));
+                    }
+                }
+                var ruleslist = (sheet.rules) ? sheet.rules : sheet.cssRules;
+                return rules.concat(to_array(ruleslist));
+            }
+            // returns an array-like object into a proper array
+            function to_array(x){
+                var a = [];
+                for(var i=0; i<x.length; i++){
+                    a.push(x[i]);
+                }
+                return a;
+            }
+            // copies hover css into new class and attaches js event handler to
+            // relevant elements to add/remove the new class
+            function parse_rule(rule){
+                // regex from http://www.xs4all.nl/~peterned/htc/csshover3-source.htc
+                //var REG_INTERACTIVE = /(^|\s)((([^a]([^ ]+)?)|(a([^#.][^ ]+)+)):(hover|active|focus))/i
+                var REG_INTERACTIVE = /(^|\s)((([^a]([^ ]+)?)|(a([^#.][^ ]+)+)):hover)/i
+
+                select = rule.selectorText;
+                if(REG_INTERACTIVE.test(select)){
+                    //var cl = next_class();
+                    //appendRule(storage, select.replace(':hover','') + "." + cl, rule.style.cssText);
+                    appendRule(storage, select.replace(':hover','') + ".notify_hover", rule.style.cssText);
+                    $(select.replace(':hover', '')).bind(
+                        'notify_mouseover',
+                        function(){
+                            $(this).addClass('notify_hover');
+                            console.log($(this).attr('class'));
+                        }
+                    ).bind(
+                        'notify_mouseout',
+                        function(){$(this).removeClass('notify_hover');}
+                    );
+                }
+            }
+
+            // start parsing all stylesheets
+            var sheets = window.document.styleSheets;
+            var rules = [];
+            for(var i=0; i<sheets.length; i++){
+                rules = rules.concat(parse_sheet(sheets[i]));
+            }
+            for(var i=0; i<rules.length; i++){
+                parse_rule(rules[i]);
+            }
+
+        },
         init: function(){
+            $._notify.add_styles();
             // fake hover events (can't use normal mouseover/mouseout, as
             // these are triggered when hiding/showing to find element below)
             $(document).mousemove(function(e){
+                var newhover;
                 $("#notifications li").each(function(){
                     if($(this).is_hovering(e.pageX, e.pageY)){
+                        newhover = $(this).parent().below(e.pageX, e.pageY);
+                        newhover = newhover.get(0);
                         if(!$(this).data('notify_hover')){
                             $(this).trigger('notify_mouseover');
                             $(this).data('notify_hover', true);
@@ -108,6 +206,13 @@
                         $(this).data('notify_hover', false);
                     }
                 });
+                if($._notify.last_hover && newhover != $._notify.last_hover){
+                    $($._notify.last_hover).trigger('notify_mouseout');
+                }
+                if(newhover && newhover != $._notify.last_hover){
+                    $._notify.last_hover = newhover;
+                    $(newhover).trigger('notify_mouseover');
+                }
             });
         }
     }

@@ -54,9 +54,14 @@ Tested and working on:
 Additional testing would be welcome, if you have any more results
 to add please get in touch.
 
+
 ==================
 Known Issues
 ------------------
 
-There are currently no known issues (a little sluggish on Opera, perhaps).
-If you find any, please submit an Issue on GitHub
+Browser security error if opened as a local file instead of run through a
+webserver. Most other issues are due to ongoing development on handling 
+CSS for elements behind the notifications. Active and focus CSS properties
+are not currently supported, and hover styles are only partially supported.
+
+If you have any problems, please submit an Issue on GitHub.
